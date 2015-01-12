@@ -1,0 +1,76 @@
+安装Git
+
+window
+“Git”->“Git Bash”
+
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+注意git config命令的--global参数。
+表示你这台机器上所有的Git仓库都会使用这个配置。
+当然也可以对某个仓库指定不同的用户名和Email地址。
+
+
+创建版本库
+
+选择一个合适的地方，创建一个空目录
+$ mkdir program
+$ cd program
+$ pwd
+pwd命令用于显示当前目录
+
+创建git仓库
+$ git init
+
+把文件添加到仓库
+$ git add <file>
+
+把文件提交到仓库
+$ git commit -m "XXX" //-m "XXX"本次提交说明
+
+查看仓库当前的状态
+$ git status
+
+查看difference
+$ git diff <file>
+
+提交修改和提交新文件是一样的分两步
+$ git add <file>
+$ git commit -m "XXX"
+
+
+版本回退
+显示从最近到最远的提交日志
+$ git log
+$ git log --pretty=oneline //--pretty=oneline
+
+在Git中，用HEAD表示当前版本，
+上一个版本就是HEAD^，
+上上一个版本就是HEAD^^，
+往上100个版本写成HEAD~100。
+$ git reset --hard HEAD^
+$ git reset --hard commit_id //commit_id版本号
+
+查看每一次命令记录
+$ git reflog
+
+查看工作区和版本库里面最新版本的区别
+$ git diff HEAD -- <file>
+
+把<file>文件在工作区的修改全部撤销：
+1.修改后还没有被放到暂存区，撤销修改就回到和版本库一模一样的状态；
+2.已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+$ git checkout -- <file>
+
+当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，
+$ git checkout -- <file>。
+
+当你不但改乱了工作区某个文件的内容，
+还添加到了暂存区时，想丢弃修改，分两步，
+第一步
+$ git reset HEAD <file>
+第二步
+$ git checkout -- <file>
+
+已经提交了不合适的修改到版本库时，
+想要撤销本次提交，版本回退，不过前提是没有推送到远程库。
+
